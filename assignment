@@ -1,0 +1,19 @@
+#!/bin/bash
+interval=$1
+filepath=$2
+
+while true; do
+  if [ -f "$filepath" ]; then
+    echo "files created/exist"
+
+    sum1="$(md5sum "$filepath")"
+    sleep $interval
+    sum2="$(md5sum "$filepath")"
+    if [ "$sum1" = "$sum2" ];then
+    else
+        echo "file content has been changed"
+    fi
+  else
+     echo "file is deleted"
+  fi
+done
